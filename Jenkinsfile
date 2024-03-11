@@ -1,58 +1,28 @@
 pipeline {
     agent any
-
-    environment {
-        // Define environment variables if needed
-        // Example: MY_VARIABLE = 'value'
-    }
-
-    parameters {
-        // Define parameters if needed
-        // Example: string(name: 'TARGET_ENV', defaultValue: 'dev', description: 'Target environment')
-    }
-
+    
     stages {
         stage('Build') {
             steps {
-                echo 'Building...'
-                // Add build steps here
+                echo 'Building the project...'
+                // Add your build commands here
             }
         }
 
-        stage('Test') {
+        stage('Deploy') {
             steps {
-                echo 'Testing...'
-                // Add test steps here
-            }
-        }
-
-        stage('Deploy to Production') {
-            when {
-                expression { params.DEPLOY_TO_PROD == true }
-            }
-            steps {
-                echo 'Deploying to production...'
-                // Add deployment steps here
-            }
-        }
-
-        stage('Manual Approval') {
-            when {
-                expression { params.MANUAL_APPROVAL == true }
-            }
-            steps {
-                input 'Proceed with deployment?'
-                // Additional steps after manual approval
+                echo 'Deploying the project...'
+                // Add your deployment commands here
             }
         }
     }
 
     post {
         success {
-            echo 'Pipeline succeeded! Add post-build actions here.'
+            echo 'Pipeline succeeded! Any post-success actions can go here.'
         }
         failure {
-            echo 'Pipeline failed! Add post-failure actions here.'
+            echo 'Pipeline failed! Any post-failure actions can go here.'
         }
     }
 }
