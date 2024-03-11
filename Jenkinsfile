@@ -6,11 +6,16 @@ pipeline {
     }
 
     stages {
+        stage('Make executable') {
+            steps {
+                sh('chmod +x ./scripts/reverse_str.sh')
+            }
+        }
         stage('Reverse String') {
             steps {
                 script {
                     // Call the Bash script to reverse the string
-                    sh "./scripts/reverse_str.sh '${params.INPUT_STRING}'"
+                    sh("./scripts/reverse_str.sh ${env.INPUT_STRING}")
                 }
             }
         }
