@@ -1,18 +1,17 @@
 pipeline {
     agent any
-    
-    stages {
-        stage('Build') {
-            steps {
-                echo 'Building the project...'
-                // Add your build commands here
-            }
-        }
 
-        stage('Deploy') {
+    parameters {
+        string(name: 'INPUT_STRING', defaultValue: 'Hello', description: 'Input string to reverse')
+    }
+
+    stages {
+        stage('Reverse String') {
             steps {
-                echo 'Deploying the project...'
-                // Add your deployment commands here
+                script {
+                    // Call the Bash script to reverse the string
+                    sh "./scripts/reverse_str.sh '${params.INPUT_STRING}'"
+                }
             }
         }
     }
